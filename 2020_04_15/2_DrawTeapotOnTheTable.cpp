@@ -6,7 +6,6 @@
 int FlatShaded, Wireframed;
 int ViewX, ViewY;
 int LeftButton, RightButton;
-int Rotate;
 GLUquadricObj * obj;
 
 void InitLight()
@@ -119,41 +118,42 @@ void Keyboard(unsigned char key, int x, int y)
 	}
 }
 
-void MouseClick(GLint Button, GLint State, GLint X, GLint Y){
-    if (Button == GLUT_LEFT_BUTTON && State == GLUT_DOWN)
+void MouseClick(GLint Button, GLint State, GLint X, GLint Y)
+{
+	if (Button == GLUT_LEFT_BUTTON && State == GLUT_DOWN)
 	{
-        LeftButton = 1;
-    }
-    else
+		LeftButton = 1;
+	}
+	else
 	{
-        LeftButton = 0;
-    }
+		LeftButton = 0;
+	}
 
-    if (Button == GLUT_RIGHT_BUTTON && State == GLUT_DOWN)
+	if (Button == GLUT_RIGHT_BUTTON && State == GLUT_DOWN)
 	{
-        RightButton = 1;
-    }
-    else
+		RightButton = 1;
+	}
+	else
 	{
-        RightButton = 0;
-    }
+		RightButton = 0;
+	}
 }
-
 
 void Motion(GLint X, GLint Y)
 {
-    if (LeftButton == 1)
-    {
-        ViewX = X / 3;
-        ViewY = Y / 3;
-    }
-    if (RightButton == 1)
-    {
-        ViewX = -X / 3;
-        ViewY = -Y / 3;
-    }
+	if (LeftButton == 1)
+	{
+		ViewX = X / 3;
+		ViewY = Y / 3;
+	}
 
-    glutPostRedisplay();
+	if (RightButton == 1)
+	{
+		ViewX = -X / 3;
+		ViewY = -Y / 3;
+	}
+
+	glutPostRedisplay();
 }
 
 void Display()
@@ -165,8 +165,8 @@ void Display()
 	gluLookAt(0.0, 0.2, 0.0, 0.3, -0.0, -0.5, 0.0, 1.0, 0.0);
 
 	glRotatef(0.0, 0.0, 0.0, 1.0);
-    glRotatef(ViewY, 1.0, 0.0, 0.0);
-    glRotatef(ViewX, 0.0, 1.0, 0.0);
+	glRotatef(ViewY, 1.0, 0.0, 0.0);
+	glRotatef(ViewX, 0.0, 1.0, 0.0);
 
 	glPushMatrix();
 		glTranslatef(0.4, 0.0, -0.4);
@@ -223,20 +223,13 @@ void Reshape(int w, int h)
 	glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
 }
 
-void Timer(int Value)
-{
-    Rotate = (Rotate + 5) % 360;
-    glutPostRedisplay();
-    glutTimerFunc(50, Timer, 1);
-}
-
 int main(int argc, char **argv)
 {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGBA | GLUT_DEPTH);
 	glutInitWindowSize(400, 400);
-	glutInitWindowPosition((glutGet(GLUT_SCREEN_WIDTH) - 400) / 2, 
-		                   (glutGet(GLUT_SCREEN_HEIGHT) - 400) / 2);
+	glutInitWindowPosition((glutGet(GLUT_SCREEN_WIDTH) - 400) / 2,
+		(glutGet(GLUT_SCREEN_HEIGHT) - 400) / 2);
 	glutCreateWindow("컴퓨터 그래픽스 4주차 과제 (3)");
 
 	glClearColor(0.4, 0.4, 0.4, 0.0);
@@ -245,8 +238,7 @@ int main(int argc, char **argv)
 	glutDisplayFunc(Display);
 	glutKeyboardFunc(Keyboard);
 	glutMouseFunc(MouseClick);
-    glutMotionFunc(Motion);
-	glutTimerFunc(50, Timer, 1);
+	glutMotionFunc(Motion);
 	glutReshapeFunc(Reshape);
 
 	glutMainLoop();
