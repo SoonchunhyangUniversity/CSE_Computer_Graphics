@@ -28,7 +28,7 @@ void InitLight()
 		0.3,
 		1.0
 	};
-	GLfloat MatShininess[] = { 5.0 };
+	GLfloat MatShininess[] = { 15.0 };
 	GLfloat LightSpecular[] = { 
 		1.0,
 		1.0,
@@ -41,13 +41,13 @@ void InitLight()
 		0.8,
 		1.0
 	};
-	GLfloat light_ambient[] = { 
+	GLfloat LightAmbient[] = { 
 		0.3,
 		0.3,
 		0.3,
 		1.0
 	};
-	GLfloat light_position[] = {
+	GLfloat LightPosition[] = {
 		-3,
 		6,
 		3.0,
@@ -60,10 +60,10 @@ void InitLight()
 	glEnable(GL_LIGHT0);
 	glPolygonMode(GL_FRONT, GL_FILL);
 
-	glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+	glLightfv(GL_LIGHT0, GL_POSITION, LightPosition);
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, LightDiffuse);
 	glLightfv(GL_LIGHT0, GL_SPECULAR, LightSpecular);
-	glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
+	glLightfv(GL_LIGHT0, GL_AMBIENT, LightAmbient);
 
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, MatDiffuse);
 	glMaterialfv(GL_FRONT, GL_SPECULAR, MatSpecular);
@@ -164,7 +164,7 @@ void Display()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	gluLookAt(0.0, 0.2, 0.0, 0.3, -0.0, -0.5, 0.0, 1.0, 0.0);
+	gluLookAt(0.0, 0.2, 0.0, 0.3, 0.0, -0.7, 0.0, 1.0, 0.0);
 
 	glRotatef(0.0, 0.0, 0.0, 1.0);
 	glRotatef(ViewY, 1.0, 0.0, 0.0);
