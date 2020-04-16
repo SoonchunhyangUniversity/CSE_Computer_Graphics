@@ -10,32 +10,32 @@ GLUquadricObj * obj;
 
 void InitLight()
 {
-	GLfloat mat_diffuse[] = { 
+	GLfloat MatDiffuse[] = { 
 		0.5,
 		0.4,
 		0.3,
 		1.0
 	};
-	GLfloat mat_specular[] = { 
+	GLfloat MatSpecular[] = { 
 		1.0,
 		1.0,
 		1.0,
 		1.0
 	};
-	GLfloat mat_ambient[] = { 
+	GLfloat MatAmbient[] = { 
 		0.5,
 		0.4,
 		0.3,
 		1.0
 	};
-	GLfloat mat_shininess[] = { 10.0 };
-	GLfloat light_specular[] = { 
+	GLfloat MatShininess[] = { 5.0 };
+	GLfloat LightSpecular[] = { 
 		1.0,
 		1.0,
 		1.0,
 		1.0
 	};
-	GLfloat light_diffuse[] = { 
+	GLfloat LightDiffuse[] = { 
 		0.8,
 		0.8,
 		0.8,
@@ -58,17 +58,17 @@ void InitLight()
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	glPolygonMode(GL_FRONT, GL_FILL);
 
 	glLightfv(GL_LIGHT0, GL_POSITION, light_position);
-	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
-	glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, LightDiffuse);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, LightSpecular);
 	glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
 
-	glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_diffuse);
-	glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
-	glMaterialfv(GL_FRONT, GL_AMBIENT, mat_ambient);
-	glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess);
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, MatDiffuse);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, MatSpecular);
+	glMaterialfv(GL_FRONT, GL_AMBIENT, MatAmbient);
+	glMaterialfv(GL_FRONT, GL_SHININESS, MatShininess);
 }
 
 void Keyboard(unsigned char key, int x, int y)
@@ -86,11 +86,13 @@ void Keyboard(unsigned char key, int x, int y)
 			{
 				FlatShaded = 0;
 				glShadeModel(GL_SMOOTH);
+				gluQuadricNormals(obj, GLU_SMOOTH);
 			}
 			else
 			{
 				FlatShaded = 1;
 				glShadeModel(GL_FLAT);
+				gluQuadricNormals(obj, GLU_FLAT);
 			}
 
 			glutPostRedisplay();
@@ -199,7 +201,7 @@ void Display()
 	glPopMatrix();
 
 	glPushMatrix();
-		glTranslatef(0.3, 0.37, 0.0);
+		glTranslatef(0.3, 0.38, 0.0);
 		glRotatef(90, 1.0, 0.0, 0.0);
 		obj = gluNewQuadric();
 		gluQuadricDrawStyle(obj, GLU_FILL);
@@ -232,7 +234,7 @@ int main(int argc, char **argv)
 		(glutGet(GLUT_SCREEN_HEIGHT) - 400) / 2);
 	glutCreateWindow("컴퓨터 그래픽스 4주차 과제 (3)");
 
-	glClearColor(0.4, 0.4, 0.4, 0.0);
+	glClearColor(0.529412, 0.807843, 0.980392, 0);
 	glMatrixMode(GL_PROJECTION);
 	InitLight();
 	glutDisplayFunc(Display);
