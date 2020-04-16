@@ -6,6 +6,7 @@
 int FlatShaded, Wireframed;
 int ViewX, ViewY;
 int LeftButton, RightButton;
+int Rotate;
 GLUquadricObj * obj;
 
 void InitLight()
@@ -139,7 +140,8 @@ void MouseClick(GLint Button, GLint State, GLint X, GLint Y){
 }
 
 
-void Motion(GLint X, GLint Y){
+void Motion(GLint X, GLint Y)
+{
     if (LeftButton == 1)
     {
         ViewX = X / 3;
@@ -161,6 +163,10 @@ void Display()
 	glLoadIdentity();
 
 	gluLookAt(0.0, 0.2, 0.0, 0.3, -0.0, -0.5, 0.0, 1.0, 0.0);
+
+	glRotatef(0.0, 0.0, 0.0, 1.0);
+    glRotatef(ViewY, 1.0, 0.0, 0.0);
+    glRotatef(ViewX, 0.0, 1.0, 0.0);
 
 	glPushMatrix();
 		glTranslatef(0.4, 0.0, -0.4);
@@ -217,12 +223,20 @@ void Reshape(int w, int h)
 	glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
 }
 
+void Timer(int Value)
+{
+    Rotate = (Rotate + 5) % 360;
+    glutPostRedisplay();
+    glutTimerFunc(50, Timer, 1);
+}
+
 int main(int argc, char **argv)
 {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGBA | GLUT_DEPTH);
 	glutInitWindowSize(400, 400);
-	glutInitWindowPosition(0, 0);
+	glutInitWindowPosition((glutGet(GLUT_SCREEN_WIDTH) - 400) / 2, 
+		                   (glutGet(GLUT_SCREEN_HEIGHT) - 400) / 2);
 	glutCreateWindow("컴퓨터 그래픽스 4주차 과제 (3)");
 
 	glClearColor(0.4, 0.4, 0.4, 0.0);
@@ -232,6 +246,7 @@ int main(int argc, char **argv)
 	glutKeyboardFunc(Keyboard);
 	glutMouseFunc(MouseClick);
     glutMotionFunc(Motion);
+	glutTimerFunc(50, Timer, 1);
 	glutReshapeFunc(Reshape);
 
 	glutMainLoop();
