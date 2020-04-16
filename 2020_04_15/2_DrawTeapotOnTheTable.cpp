@@ -205,7 +205,7 @@ void Display()
 		glRotatef(90, 1.0, 0.0, 0.0);
 		obj = gluNewQuadric();
 		gluQuadricDrawStyle(obj, GLU_FILL);
-		gluCylinder(obj, 0.08, 0.06, 0.13, 10, 10);
+		gluCylinder(obj, 0.088, 0.06, 0.2, 10, 10);
 	glPopMatrix();
 
 	glPushMatrix();
