@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <GL/glut.h>
 #include <GL/GL.h>
 #include <GL/GLU.h>
@@ -58,7 +57,6 @@ void InitLight()
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
-	glPolygonMode(GL_FRONT, GL_FILL);
 
 	glLightfv(GL_LIGHT0, GL_POSITION, LightPosition);
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, LightDiffuse);
