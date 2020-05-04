@@ -6,15 +6,14 @@
 
 void DrawObject(GLfloat red, GLfloat green, GLfloat blue)
 {
-    glClear(GL_COLOR_BUFFER_BIT);
 	glColor3f(red, green, blue);
 
 	glPushMatrix();
-	glTranslatef(-10, 10, 0);
-	glBegin(GL_LINES);
-	    glVertex2i(10, 10);
-	    glVertex2i(10, -10);
-	glEnd();
+		glTranslatef(-10, 10, 0);
+		glBegin(GL_LINES);
+			glVertex2i(10, 10);
+			glVertex2i(10, -10);
+		glEnd();
 	glPopMatrix();
 
 	glBegin(GL_LINES);
@@ -23,15 +22,43 @@ void DrawObject(GLfloat red, GLfloat green, GLfloat blue)
 	glEnd();
 
 	glPushMatrix();
-	glTranslatef(2.8, 10, 0);
-	glRotatef(45, 0, 0, 1);
-	glBegin(GL_LINES);
-		glVertex2i(-9.5, 9.5);
-		glVertex2i(5, 9.5);
-	glEnd();
+		glTranslatef(2.8, 10, 0);
+		glRotatef(45, 0, 0, 1);
+		glBegin(GL_LINES);
+			glVertex2i(-9.5, 9.5);
+			glVertex2i(5, 9.5);
+		glEnd();
 	glPopMatrix();
+}
 
-	glFlush();
+ void DrawSquare()
+{
+    glClear(GL_COLOR_BUFFER_BIT);
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    glColor3f(1.0, 1.0, 1.0);
+
+    int xsize = 0, ysize = 0;
+
+    for(int j = 0;j < 10;j++)
+    {
+        xsize=0;
+
+        for(int i = 0;i < 10; i++)
+        {
+             glBegin(GL_POLYGON);
+               glVertex3f(-50.0 + xsize, -50.0 + ysize, 0.0);
+               glVertex3f(-40.0 + xsize, -50.0 + ysize, 0.0);
+               glVertex3f(-40.0 + xsize, -40.0 + ysize, 0.0);
+               glVertex3f(-50.0 + xsize, -40.0 + ysize, 0.0);
+            glEnd();
+
+         xsize += 10.0;
+      }
+
+      ysize += 10.0;
+   }
+
+   glFlush();
 }
 
 void Display() 
@@ -66,15 +93,21 @@ void Display()
 
 void MyDisplay()
 {
-    DrawObject(1, 0, 0);
+    DrawSquare();
+
+	glPushMatrix();
+		glTranslatef(0, -10, 0);
+		Display();
+	glPopMatrix();
+
 	glFlush();
     glutSwapBuffers();
 }
 
 void init (void)
 {
-    glClearColor (1.0, 1.0, 1.0, 0.0);
-    glClear (GL_COLOR_BUFFER_BIT);
+    glClearColor (0, 0, 0, 1);
+    glClear(GL_COLOR_BUFFER_BIT);
     glMatrixMode (GL_PROJECTION);
     glLoadIdentity();
     glOrtho(-50.0, 50.0, -50.0, 50.0, -1.0, 1.0);
@@ -87,9 +120,8 @@ int main(int argc, char **argv)
 {
     glutInit(&argc, argv);
     glutInitDisplayMode (GLUT_SINGLE | GLUT_RGBA);
-	glClearColor(1, 1, 1, 0);
     glutInitWindowPosition(80, 80);
-    glutInitWindowSize(500, 500);
+    glutInitWindowSize(WIDTH, HEIGHT);
     glutCreateWindow("컴퓨터그래픽스 6주차 과제");
 	init();
     glutDisplayFunc(MyDisplay);
