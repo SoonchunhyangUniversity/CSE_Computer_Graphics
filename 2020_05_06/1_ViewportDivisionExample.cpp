@@ -85,7 +85,7 @@ int main(int argc, char **argv)
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGBA);
 	glutInitWindowSize(Width, Height);
 	glutInitWindowPosition(0, 0);
-	glutCreateWindow("OpenGL Sample Drawing");
+	glutCreateWindow("컴퓨터그래픽스 과제 7주차");
 	Init();
 	glutDisplayFunc(MyDisplay);
 	glutReshapeFunc(MyReshape);
