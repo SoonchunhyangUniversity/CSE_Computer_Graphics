@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdlib.h>
 #include <GL/glut.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
@@ -90,7 +91,11 @@ void Keyboard(unsigned char key, int x, int y) {
 		std::cout << "g is down" << std::endl;
         glEnable(GL_CULL_FACE);
         glCullFace(GL_BACK);
+		std::cout << "GL_BACK" << std::endl;
+		glutPostRedisplay();
+		_sleep(2000);
 		glCullFace(GL_FRONT);
+		std::cout << "GL_FRONT" << std::endl;
         glutPostRedisplay();
 		break;
 
