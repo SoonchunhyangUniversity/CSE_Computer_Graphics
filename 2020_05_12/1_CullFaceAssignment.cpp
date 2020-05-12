@@ -4,7 +4,7 @@
 #include <GL/glu.h>
 
 void drawSolidCube() {
-    glColor3f(1, 0, 0);
+    glColor4f(1, 0, 0, 0.7);
     glBegin(GL_QUADS);
 		glVertex3f(-0.500000, -0.500000, 0.500000);
 		glVertex3f(0.500000, -0.500000, 0.500000);
@@ -12,7 +12,7 @@ void drawSolidCube() {
 		glVertex3f(-0.500000, 0.500000, 0.500000);
     glEnd();
 
-    glColor3f(0, 1, 0);
+    glColor4f(0, 1, 0, 0.7);
     glBegin(GL_QUADS);
 		glVertex3f(-0.500000, 0.500000, -0.500000);
 		glVertex3f(0.500000, 0.500000, -0.500000);
@@ -20,7 +20,7 @@ void drawSolidCube() {
 		glVertex3f(-0.500000, -0.500000, -0.500000);
     glEnd();
 
-    glColor3f(0, 0, 1);
+    glColor4f(0, 0, 1, 0.7);
     glBegin(GL_QUADS);
 		glVertex3f(-0.500000, 0.500000, 0.500000);
 		glVertex3f(0.500000, 0.500000, 0.500000);
@@ -28,7 +28,7 @@ void drawSolidCube() {
 		glVertex3f(-0.500000, 0.500000, -0.500000);
     glEnd();
 
-    glColor3f(1, 1, 0);
+    glColor4f(1, 1, 0, 0.7);
     glBegin(GL_QUADS);
 		glVertex3f(-0.500000, -0.500000, -0.500000);
 		glVertex3f(0.500000, -0.500000, -0.500000);
@@ -36,7 +36,7 @@ void drawSolidCube() {
 		glVertex3f(-0.500000, -0.500000, 0.500000);
     glEnd();
 
-    glColor3f(1, 0, 1);
+    glColor4f(1, 0, 1, 0.7);
     glBegin(GL_QUADS);
 		glVertex3f(0.500000, -0.500000, 0.500000);
 		glVertex3f(0.500000, -0.500000, -0.500000);
@@ -44,7 +44,7 @@ void drawSolidCube() {
 		glVertex3f(0.500000, 0.500000, 0.500000);
     glEnd();
 
-    glColor3f(0, 1, 1);
+    glColor4f(0, 1, 1, 0.7);
     glBegin(GL_QUADS);
 		glVertex3f(-0.500000, -0.500000, -0.500000);
 		glVertex3f(-0.500000, -0.500000, 0.500000);
@@ -65,7 +65,8 @@ void display(void) {
     gluLookAt(2.0, 2.0, 3.0,
         0.0, 0.0, 0.0,
         0.0, 1.0, 0.0);
-
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     drawSolidCube();
     glutSwapBuffers();
 }
@@ -74,7 +75,7 @@ void Keyboard(unsigned char key, int x, int y) {
     switch (key) {
     case 'q':
     case 'Q':
-    case '\033':
+    case '\0.7':
         exit(0);
         break;
 
