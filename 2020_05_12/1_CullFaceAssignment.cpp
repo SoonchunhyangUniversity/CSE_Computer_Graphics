@@ -86,6 +86,14 @@ void Keyboard(unsigned char key, int x, int y) {
         glutPostRedisplay();
         break;
 
+	case 'g':
+		std::cout << "g is down" << std::endl;
+        glEnable(GL_CULL_FACE);
+        glCullFace(GL_BACK);
+		glCullFace(GL_FRONT);
+        glutPostRedisplay();
+		break;
+
     case 'b':
         std::cout << "b is down" << std::endl;
         glEnable(GL_CULL_FACE);
