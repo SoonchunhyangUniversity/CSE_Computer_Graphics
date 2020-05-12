@@ -63,8 +63,8 @@ void display(void) {
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     gluLookAt(2.0, 2.0, 3.0,
-        0.0, 0.0, 0.0,
-        0.0, 1.0, 0.0);
+              0.0, 0.0, 0.0,
+              0.0, 1.0, 0.0);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     drawSolidCube();
@@ -108,7 +108,8 @@ int main(int argc, char ** argv) {
     glutInit( & argc, argv);
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
     glutInitWindowSize(400, 400);
-    glutInitWindowPosition(240, 212);
+    glutInitWindowPosition((glutGet(GLUT_SCREEN_WIDTH) - 400)/2, 
+                    	   (glutGet(GLUT_SCREEN_HEIGHT) - 400)/2);
     glutCreateWindow("컴퓨터그래픽스 과제 8주차");
     glutDisplayFunc(display);
     glutKeyboardFunc(Keyboard);
